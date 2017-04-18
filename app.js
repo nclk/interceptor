@@ -16,8 +16,11 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
 
+if (!process.env["SESSION_SECRET"])
+    throw new Error("SESSION_SECRET envvar required");
+
 app.use(require("express-session")({
-    secret: "This is a secret :o",
+    secret: process.env["SESSION_SECRET"],
     resave: false,
     saveUninitialized: false
 }));
