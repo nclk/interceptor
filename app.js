@@ -51,9 +51,9 @@ routes.registerUser("admin", process.env["ADMIN_PASSWORD"] || "admin", function(
     }
     else {
         console.log(`${user.username} created`);
-        app.listen(3000, function(){
-            console.log("The server has started");
-        });
     }
 
+});
+app.listen(3000, function(){
+    console.log("The server has started");
 });
