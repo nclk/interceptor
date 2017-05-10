@@ -64,7 +64,11 @@ router.post("/create-user", isLoggedIn, function(req, res){
 
 //show login form
 router.get("/login", function(req, res){
-    res.render("login");
+    return ((uri) => {
+        return uri
+            ? res.redirect(uri)
+            : res.render("login");
+    })(req.get("X-Original-URI"));
 });
 
 //handle login
