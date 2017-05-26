@@ -54,6 +54,6 @@ routes.registerUser("admin", process.env["ADMIN_PASSWORD"] || "admin", function(
     }
 
 });
-app.listen(3000, function(){
+app.listen(process.env.PORT, function(){
     console.log("The server has started");
 });

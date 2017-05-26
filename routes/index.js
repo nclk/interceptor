@@ -52,12 +52,12 @@ router.post("/create-user", isLoggedIn, function(req, res){
                 //return res.render("register");
                 res.redirect("/admin/create-user");
             } else {
-                passport.authenticate("local")(req, res, function(){
+                //passport.authenticate("local")(req, res, function(){
                     req.flash(
                         "success", "You have successfully created user " + user.username
                     );
                     res.redirect("/admin/create-user");
-                });
+                //});
             }
         }
     );
