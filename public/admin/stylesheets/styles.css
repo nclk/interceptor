@@ -10,7 +10,11 @@ ul.list-group {
     color: white;
 }
 
-.create-user-form {
+.create-user-form, .edit-user-form {
     width: 50%;
     margin-left: 0;
+}
+
+a {
+    
 }

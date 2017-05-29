@@ -1,0 +1,47 @@
+<% include ./partials/header %>
+
+<div class="container">
+    
+    <h2>User Details</h2>
+    
+
+    <div class="row">
+        <div class="col-lg-12">
+            
+            <ul>
+                <li>ID: <%= user._id %></li>
+                <li>User Name: <%= user.username %></li>
+                
+            
+            </ul>
+            
+            <h3>Update Password</h3>
+            
+            <form class="edit-user-form" action="/admin/users/<%=user._id%>" method="POST">
+                
+                <div class="form-group">
+                    <label for="password">Password </label>
+                    <input class="form-control" type="password" placeholder="password" name="password" id="password">
+                
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm">Confirm Password </label>
+                    <input class="form-control" type="password" placeholder="confirm password" name="confirm" id="confirm">
+                    <span id="message"></span>
+                
+                </div>
+                <button class="btn btn-primary" type="submit" value="Submit" id="submit">Submit</button>
+            
+            </form>
+
+                  
+        </div>
+    
+    </div>
+
+
+
+</div>
+
+<% include ./partials/footer %>
