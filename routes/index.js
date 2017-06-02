@@ -25,6 +25,63 @@ router.get("/", isLoggedIn, function(req, res){
     res.render("create-user");
 });
 
+//get all users
+router.get("/users", isLoggedIn, function(req, res){
+    
+    //find all users in db
+    User.find({}, function(err, users){
+        if(err){
+            console.log(err);
+        } else {
+            //res.render
+            //res.send(JSON.stringify(users));
+            res.render("users", {users:users, currentUser: req.user});
+            console.log(req.user);
+        }
+    });
+})
+
+//get one user
+router.get("/users/:id", function(req, res){
+    User.findById(req.params.id, function(err, foundUser){
+        res.render("view-user", {user: foundUser});
+    });
+});
+
+//edit user
+router.post("/users/:id", function(req, res){
+    
+    User.findById(req.params.id, function(err, foundUser){
+        if(err){
+            console.log(err);
+            res.redirect("/admin/users")
+        } 
+        
+        if(foundUser){
+            foundUser.setPassword(req.body.password, function(){
+            foundUser.save();
+            req.flash("success", "Password has been updated successfully.");
+            res.redirect("/admin/users/" + req.params.id);
+        })
+            
+        } else {
+            res.redirect("/admin/users");
+        }
+    })
+});
+
+//delete a user
+router.get("/users/delete/:id", function(req, res){
+    User.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/admin/users");
+            console.log(err);
+        } else {
+            res.redirect("/admin/users")
+        }
+    });
+});
+
 router.get("/auth", function(req, res) {
     res.status(req.isAuthenticated() ? 200 : 401);
     res.set("X-Original-URI", req.get("X-Original-URI"));
