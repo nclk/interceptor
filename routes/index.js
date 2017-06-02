@@ -22,7 +22,7 @@ function registerUser(username, password, callback) {
 
 //root
 router.get("/", isLoggedIn, function(req, res){
-    res.render("create-user");
+    res.redirect("/admin/users");
 });
 
 //get all users
