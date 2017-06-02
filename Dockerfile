@@ -1,4 +1,5 @@
-FROM pritunl/archlinux:latest
+#FROM pritunl/archlinux:latest
+FROM base/archlinux
 
 WORKDIR /interceptor
 
