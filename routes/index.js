@@ -59,11 +59,10 @@ router.post("/users/:id", function(req, res){
         
         if(foundUser){
             foundUser.setPassword(req.body.password, function(){
-            foundUser.save();
-            req.flash("success", "Password has been updated successfully.");
-            res.redirect("/admin/users/" + req.params.id);
-        })
-            
+                foundUser.save();
+                req.flash("success", "Password has been updated successfully.");
+                res.redirect("/admin/users/" + req.params.id);
+            })
         } else {
             res.redirect("/admin/users");
         }
