@@ -1,11 +1,18 @@
-<% include ./partials/header %>
+<!doctype html>
+<html>
+    <% include ./partials/head %>
+    <body>
+        <% include ./partials/header %>
 
-<div class="container">
-    <h1>Welcome Home</h1>
-    <ul class="list-group">
-        <li class="list-group-item"><a href="/register">Sign Up</a></li>
-        <li class="list-group-item"><a href="/login">Login</a></li>
-        <li class="list-group-item"><a href="/logout">Logout</a></li>
-    </ul>
-</div>
-<% include ./partials/footer %>
+        <div class="container">
+            <h1>Welcome Home</h1>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/register">Sign Up</a></li>
+                <li class="list-group-item"><a href="/login">Login</a></li>
+                <li class="list-group-item"><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+
+        <% include ./partials/footer %>
+    </body>
+</html>

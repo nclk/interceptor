@@ -130,7 +130,7 @@ router.get("/login", function(req, res){
 
 //handle login
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/admin/create-user",
+    successRedirect: "/admin/",
     failureRedirect: "/admin/login"
 }), function(req, res){
     // can't get here?

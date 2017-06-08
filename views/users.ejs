@@ -1,46 +1,45 @@
-<% include ./partials/header %>
+<!doctype html>
+<html>
+    <% include ./partials/head %>
+    <body>
+        <% include ./partials/header %>
 
-<div class="container">
-    
-    <h2>All Users</h2>
-    
-    <div class="row">
-        <div class="col-lg-12">
-            
-            
-            <table class="table table-striped">
-                <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Delete</th>
-                </thead>
-                <tbody>
-                    <% users.forEach(function(user){ %>
-                    <tr>
-                        <td><%= user._id %></td>
-                        <td><a href="/admin/users/<%= user._id %>"><%= user.username %></a></td>
-                        <td>
+        <div class="container">
 
-                            <% if( currentUser._id.toString() !== user._id.toString()){ %>
-                                <a href="/admin/users/delete/<%=user._id%>">Delete User</a>
-                            <% } %>
+            <h2>All Users</h2>
 
-                        </td>
-
-                    </tr>
-                    <% }) %>
-
-                </tbody>
-                
-
-            </table>
-
-                  
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Delete</th>
+                        </thead>
+                        <tbody>
+                            <% users.forEach(function(user){ %>
+                            <tr>
+                                <td><%= user._id %></td>
+                                <td>
+                                    <a href="/admin/users/<%= user._id %>">
+                                        <%= user.username %>
+                                    </a>
+                                </td>
+                                <td>
+                                    <% if( currentUser._id.toString() !== user._id.toString()){ %>
+                                        <a href="/admin/users/delete/<%=user._id%>">
+                                            Delete User
+                                        </a>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    
-    </div>
 
-
-</div>
-
-<% include ./partials/footer %>
+        <% include ./partials/footer %>
+    </body>
+</html>
