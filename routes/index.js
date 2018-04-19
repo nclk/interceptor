@@ -42,14 +42,14 @@ router.get("/users", isLoggedIn, function(req, res){
 })
 
 //get one user
-router.get("/users/:id", function(req, res){
+router.get("/users/:id", isLoggedIn, function(req, res){
     User.findById(req.params.id, function(err, foundUser){
         res.render("view-user", {user: foundUser});
     });
 });
 
 //edit user
-router.post("/users/:id", function(req, res){
+router.post("/users/:id", isLoggedIn, function(req, res){
     
     User.findById(req.params.id, function(err, foundUser){
         if(err){
