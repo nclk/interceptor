@@ -70,7 +70,7 @@ router.post("/users/:id", function(req, res){
 });
 
 //delete a user
-router.get("/users/delete/:id", function(req, res){
+router.get("/users/delete/:id", isLoggedIn, function(req, res){
     User.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/admin/users");
