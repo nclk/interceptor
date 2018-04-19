@@ -36,25 +36,32 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use(function(req, res, next){
+app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
     next();
 });
 
+//app.use(function(req, res, next) {
+//    console.log(req, req.headers);
+//    next();
+//});
+
 app.use("/admin", routes.router);
 
-routes.registerUser("admin", process.env["ADMIN_PASSWORD"] || "admin", function(e, user) {
-
-    if (e) {
-        console.error("Admin user not created");
+routes.registerUser(
+    "admin", 
+    process.env["ADMIN_PASSWORD"] || "admin",
+    function(e, user) {
+        if (e) {
+            console.error("Admin user not created");
+        }
+        else {
+            console.log(`${user.username} created`);
+        }
     }
-    else {
-        console.log(`${user.username} created`);
-    }
-
-});
+);
 app.listen(process.env.PORT, function(){
     console.log("The server has started");
 });

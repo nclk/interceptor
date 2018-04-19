@@ -83,7 +83,6 @@ router.get("/users/delete/:id", isLoggedIn, function(req, res){
 
 router.get("/auth", function(req, res) {
     res.status(req.isAuthenticated() ? 200 : 401);
-    res.set("X-Original-URI", req.get("X-Original-URI"));
     res.end();
 });
 
@@ -121,19 +120,17 @@ router.post("/create-user", isLoggedIn, function(req, res){
 
 //show login form
 router.get("/login", function(req, res){
-    return ((uri) => {
-        return uri
-            ? res.redirect(uri)
-            : res.render("login");
-    })(req.get("X-Original-URI"));
+    return res.render("login", {next: req.query["next"]});
 });
 
-//handle login
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/admin/",
-    failureRedirect: "/admin/login"
-}), function(req, res){
-    // can't get here?
+router.post("/login", function(req, res, next) {
+    // can we set a header here with the user info or is it already set?
+    passport.authenticate("local", {
+        //successRedirect: req.query["next"] || "/admin/",
+        failureRedirect: `/admin/login${req.query["next"] && "?next=" + req.query["next"]}`
+    })(req, res, next);
+}, isLoggedIn, function(req, res, next) {
+    res.redirect(req.query["next"] || "/admin/");
 });
 
 //logout
